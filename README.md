@@ -2,7 +2,7 @@
 
 Configuration complète pour le minage solo sur le réseau **Pearl (PRL)** avec les cartes **NVIDIA GeForce RTX 50xx (`sm120`)** sous **Windows / WSL2**.
 
-![Aperçu du tableau de bord Grafana Pearl Solo Mining](docs/dashboard-preview.png)
+![Aperçu du tableau de bord Grafana Pearl Solo Mining](docs/Dashboard_Pearl.png)
 
 ## Prérequis & Fonctionnalités
 - **Réseau WSL2 (`wslconfig.example`)** et nœud local `pearld` synchronisé.
