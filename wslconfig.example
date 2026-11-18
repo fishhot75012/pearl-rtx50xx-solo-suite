@@ -1,0 +1,8 @@
+[wsl2]
+# Allocation CPU/RAM recommandée pour un système 24 cœurs / 32 Go RAM
+processors=16
+memory=20GB
+swap=16GB
+
+# Indispensable pour exposer directement le port P2P 44108 et les ports locaux sous Windows
+networkingMode=mirrored

@@ -3,11 +3,14 @@
 Configuration complète et automatisée pour le minage solo sur le réseau **Pearl (PRL)** avec les cartes graphiques **NVIDIA GeForce RTX 50xx (`sm120`)** sous **Windows / WSL2**, incluant la supervision temps réel et les alertes de bloc trouvé.
 
 ## Prérequis indispensables avant démarrage
-1. **Nœud `pearld` local sur la même instance WSL2 :** Le nœud `pearld` (v1.5.7+) doit être installé et exécuté dans **le même environnement WSL2** (stockage `ext4` recommandé) avec l'option `--metricslisten=127.0.0.1:9105` activée.
-2. **Blockchain entièrement synchronisée :** Attendez que le nœud soit à 100 % synchronisé (`pearld_chain_is_current = 1`) avant de lancer `start_pearl_miner.sh`.
-3. **Configuration réseau WSL2 (`.wslconfig`) & Port P2P `44108` :**
-   - Activez `networkingMode=mirrored` dans votre fichier Windows `%UserProfile%\.wslconfig`.
-   - Ouvrez le port **44108 (TCP)** sur votre box Internet (redirection NAT vers le PC) et dans le pare-feu Windows/Hyper-V afin d'accepter les pairs entrants (`inbound`) et d'optimiser la propagation des blocs.
+1. **Configuration réseau WSL2 (`wslconfig.example`) :**
+   - Copiez `wslconfig.example` vers `C:\Users\<VotreNom>\.wslconfig` sous Windows et exécutez `wsl --shutdown` dans PowerShell pour appliquer `networkingMode=mirrored`.
+2. **Nœud `pearld` local sur la même instance WSL2 (`pearld.conf.example`) :**
+   - Le nœud `pearld` (v1.5.7+) doit tourner dans **le même environnement WSL2** (sur stockage `ext4`).
+   - Copiez `pearld.conf.example` vers `~/.pearld/pearld.conf` et renseignez vos identifiants RPC ainsi que votre IPv4 publique (`externalip`).
+   - **Blockchain synchronisée :** Attendez que le nœud soit à 100 % synchronisé (`pearld_chain_is_current = 1`) avant de lancer le mineur.
+3. **Ouverture du port P2P `44108` :**
+   - Ouvrez le port **44108 (TCP)** sur votre box Internet (redirection NAT vers le PC) et dans le pare-feu Windows/Hyper-V afin d'accepter les pairs entrants (`inbound`).
    - *(Sécurité)* Gardez le port RPC **`44107`** strictement fermé vers l'extérieur (`127.0.0.1`).
 
 ## Fonctionnalités incluses

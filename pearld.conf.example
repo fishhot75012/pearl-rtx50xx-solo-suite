@@ -1,0 +1,17 @@
+# Identifiants RPC (doivent correspondre à ceux de votre fichier .env)
+rpcuser=votre_rpc_user
+rpcpass=votre_rpc_password
+
+# Désactiver TLS en local pour simplifier la liaison avec pearl-miner
+notls=1
+
+# Optimisations mémoire et réseau (i9 / 20 Go RAM WSL2)
+sigcachemaxsize=500000
+maxmempool=512
+
+# Activation du point de terminaison Prometheus pour Grafana
+metricslisten=127.0.0.1:9105
+
+# Remplacez par votre IPv4 publique fixe (obtenue via : curl -s -4 ifconfig.me)
+# Nécessaire pour accélérer la découverte P2P entrante sur le port 44108
+externalip=ip_publique
