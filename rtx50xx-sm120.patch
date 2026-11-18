@@ -1,0 +1,22 @@
+diff --git a/miner/vllm-miner/Dockerfile b/miner/vllm-miner/Dockerfile
+index 8247b44b..76e199f9 100644
+--- a/miner/vllm-miner/Dockerfile
++++ b/miner/vllm-miner/Dockerfile
+@@ -38,6 +38,7 @@ COPY miner/miner-base/pyproject.toml ./miner/miner-base/
+ COPY miner/pearl-gateway/pyproject.toml ./miner/pearl-gateway/
+ 
+ # Sync remote packages ONLY (mainly download torch and vLLM)
++
+ RUN --mount=type=cache,target=/root/.cache/uv \
+     --mount=type=cache,target=/usr/local/cargo/registry \
+     --mount=type=cache,target=/usr/local/cargo/git \
+@@ -48,6 +49,9 @@ COPY miner/pearl-gemm/ ./miner/pearl-gemm/
+ COPY miner/pearl-gemm-build-utils/ ./miner/pearl-gemm-build-utils/
+ 
+ # Build CUDA kernels (pearl-gemm)
++# Build CUDA kernels (pearl-gemm)
++ARG PEARL_GEMM_ARCH=sm_120a
++ENV PEARL_GEMM_ARCH=${PEARL_GEMM_ARCH}
+ RUN --mount=type=cache,target=/root/.cache/uv \
+     --mount=type=cache,target=/usr/local/cargo/registry \
+     --mount=type=cache,target=/usr/local/cargo/git \

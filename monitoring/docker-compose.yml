@@ -1,0 +1,60 @@
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: pearl-prometheus
+    network_mode: host
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=15d'
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: pearl-grafana
+    network_mode: host
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-pearladmin}
+      - GF_SMTP_ENABLED=${SMTP_ENABLED:-false}
+      - GF_SMTP_HOST=${SMTP_HOST:://gmail.com}
+      - GF_SMTP_USER=${SMTP_USER}
+      - GF_SMTP_PASSWORD=${SMTP_PASSWORD}
+      - GF_SMTP_FROM_ADDRESS=${SMTP_USER}
+      - GF_SMTP_FROM_NAME=Pearl Solo Miner
+    restart: unless-stopped
+
+  gpu-exporter:
+    image: python:3.11-slim
+    container_name: pearl-gpu-exporter
+    network_mode: host
+    volumes:
+      - ./gpu_exporter.py:/app/gpu_exporter.py:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [utility]
+    command: ["python3", "/app/gpu_exporter.py"]
+    restart: unless-stopped
+
+  solo-exporter:
+    image: python:3.11-slim
+    container_name: pearl-solo-exporter
+    network_mode: host
+    volumes:
+      - ./solo_exporter.py:/app/solo_exporter.py:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /usr/bin/docker:/usr/bin/docker:ro
+    command: ["python3", "/app/solo_exporter.py"]
+    restart: unless-stopped
+
+volumes:
+  prometheus_data:
+  grafana_data:

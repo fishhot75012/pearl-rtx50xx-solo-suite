@@ -1,0 +1,289 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [
+            { "options": { "0": { "color": "red", "index": 1, "text": "EN COURS..." }, "1": { "color": "green", "index": 0, "text": "SYNCHRONISÉ" } }, "type": "value" }
+          ],
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "red", "value": null }, { "color": "green", "value": 1 } ] }
+        }
+      },
+      "gridPos": { "h": 4, "w": 3, "x": 0, "y": 0 },
+      "id": 1,
+      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "reduceOptions": { "calcs": [ "lastNotNull" ] } },
+      "title": "État Nœud pearld",
+      "type": "stat",
+      "targets": [ { "expr": "pearld_chain_is_current", "refId": "A" } ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "decimals": 0,
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "blue", "value": null } ] }
+        }
+      },
+      "gridPos": { "h": 4, "w": 3, "x": 3, "y": 0 },
+      "id": 2,
+      "options": { "colorMode": "value", "graphMode": "area", "justifyMode": "center", "reduceOptions": { "calcs": [ "lastNotNull" ] } },
+      "title": "Hauteur Blockchain",
+      "type": "stat",
+      "targets": [ { "expr": "pearld_chain_tip_height", "refId": "A" } ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "decimals": 1,
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "orange", "value": null }, { "color": "green", "value": 50 } ] }
+        }
+      },
+      "gridPos": { "h": 4, "w": 3, "x": 6, "y": 0 },
+      "id": 3,
+      "options": { "colorMode": "value", "graphMode": "area", "justifyMode": "center", "reduceOptions": { "calcs": [ "lastNotNull" ] } },
+      "title": "Débit vLLM (tok/s)",
+      "type": "stat",
+      "targets": [ { "expr": "rate(vllm:generation_tokens_total[1m])", "refId": "A" } ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "decimals": 0,
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "blue", "value": null }, { "color": "green", "value": 1 } ] }
+        }
+      },
+      "gridPos": { "h": 4, "w": 3, "x": 9, "y": 0 },
+      "id": 13,
+      "options": { "colorMode": "background", "graphMode": "none", "justifyMode": "center", "reduceOptions": { "calcs": [ "lastNotNull" ] } },
+      "title": "Blocs Trouvés (Solo)",
+      "type": "stat",
+      "targets": [ { "expr": "pearl_solo_blocks_found", "refId": "A" } ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "decimals": 0,
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "purple", "value": null } ] }
+        }
+      },
+      "gridPos": { "h": 4, "w": 3, "x": 12, "y": 0 },
+      "id": 14,
+      "options": { "colorMode": "value", "graphMode": "area", "justifyMode": "center", "reduceOptions": { "calcs": [ "lastNotNull" ] } },
+      "title": "Requêtes (Session)",
+      "type": "stat",
+      "targets": [ { "expr": "pearl_session_work_units", "refId": "A" } ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "decimals": 0,
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 1200 }, { "color": "orange", "value": 2500 } ] },
+          "unit": "d"
+        }
+      },
+      "gridPos": { "h": 4, "w": 3, "x": 15, "y": 0 },
+      "id": 15,
+      "options": { "colorMode": "value", "graphMode": "none", "justifyMode": "center", "reduceOptions": { "calcs": [ "lastNotNull" ] } },
+      "title": "Temps Moyen / Bloc",
+      "type": "stat",
+      "targets": [ { "expr": "pearl_estimated_ttf_days", "refId": "A" } ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "decimals": 0,
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 180 }, { "color": "red", "value": 600 } ] },
+          "unit": "s"
+        }
+      },
+      "gridPos": { "h": 4, "w": 3, "x": 18, "y": 0 },
+      "id": 4,
+      "options": { "colorMode": "value", "graphMode": "none", "justifyMode": "center", "reduceOptions": { "calcs": [ "lastNotNull" ] } },
+      "title": "Âge Dernier Bloc",
+      "type": "stat",
+      "targets": [ { "expr": "time() - pearld_chain_tip_timestamp_seconds", "refId": "A" } ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "decimals": 0,
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "red", "value": null }, { "color": "yellow", "value": 3 }, { "color": "green", "value": 8 } ] }
+        }
+      },
+      "gridPos": { "h": 4, "w": 3, "x": 21, "y": 0 },
+      "id": 5,
+      "options": { "colorMode": "value", "graphMode": "none", "justifyMode": "center", "reduceOptions": { "calcs": [ "lastNotNull" ] } },
+      "title": "Pairs P2P",
+      "type": "stat",
+      "targets": [ { "expr": "pearld_p2p_peers", "refId": "A" } ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "fillOpacity": 20, "lineWidth": 2, "showPoints": "never" },
+          "unit": "celsius"
+        }
+      },
+      "gridPos": { "h": 7, "w": 8, "x": 0, "y": 4 },
+      "id": 10,
+      "options": { "legend": { "calcs": [ "mean", "max", "lastNotNull" ], "displayMode": "table", "placement": "bottom" } },
+      "title": "RTX 5070 Ti : Température GPU (°C)",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "DCGM_FI_DEV_GPU_TEMP", "legendFormat": "Température GPU", "refId": "A" }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "fillOpacity": 20, "lineWidth": 2, "showPoints": "never" },
+          "unit": "watt"
+        }
+      },
+      "gridPos": { "h": 7, "w": 8, "x": 8, "y": 4 },
+      "id": 11,
+      "options": { "legend": { "calcs": [ "mean", "max", "lastNotNull" ], "displayMode": "table", "placement": "bottom" } },
+      "title": "RTX 5070 Ti : Consommation (Watts)",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "DCGM_FI_DEV_POWER_USAGE", "legendFormat": "Puissance instantanée", "refId": "A" }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "fillOpacity": 20, "lineWidth": 2, "showPoints": "never" },
+          "unit": "decmbytes"
+        }
+      },
+      "gridPos": { "h": 7, "w": 8, "x": 16, "y": 4 },
+      "id": 12,
+      "options": { "legend": { "calcs": [ "max", "lastNotNull" ], "displayMode": "table", "placement": "bottom" } },
+      "title": "RTX 5070 Ti : Mémoire VRAM (Mo)",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "DCGM_FI_DEV_FB_USED", "legendFormat": "VRAM utilisée", "refId": "A" },
+        { "expr": "DCGM_FI_DEV_FB_FREE", "legendFormat": "VRAM libre", "refId": "B" }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "fillOpacity": 20, "lineWidth": 2, "showPoints": "never" }
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 11 },
+      "id": 6,
+      "options": { "legend": { "calcs": [ "mean", "max", "lastNotNull" ], "displayMode": "table", "placement": "bottom" } },
+      "title": "Puissance d'Inférence vLLM (Tokens / seconde)",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "rate(vllm:generation_tokens_total[1m])", "legendFormat": "Tokens/sec ({{model_name}})", "refId": "A" }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "fillOpacity": 15, "lineWidth": 2, "showPoints": "never" },
+          "decimals": 0
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 11 },
+      "id": 7,
+      "options": { "legend": { "calcs": [ "mean", "max", "lastNotNull" ], "displayMode": "table", "placement": "bottom" } },
+      "title": "Saturation GPU : Requêtes Parallèles (Batch vLLM)",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "vllm:num_requests_running", "legendFormat": "Requêtes actives", "refId": "A" }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "fillOpacity": 10, "lineWidth": 2, "showPoints": "never" }
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 19 },
+      "id": 8,
+      "options": { "legend": { "calcs": [ "mean", "lastNotNull" ], "displayMode": "table", "placement": "bottom" } },
+      "title": "Communication Mineur ↔ Nœud (Appels RPC / min)",
+      "type": "timeseries",
+      "targets": [
+{ "expr": "rate(pearld_rpc_requests_total[1m]) * 60", "legendFormat": "Requêtes RPC/min", "refId": "A" },
+{ "expr": "pearld_rpc_auth_failures_total", "legendFormat": "Échecs Auth RPC", "refId": "B" }
+]
+},
+{
+"datasource": { "type": "prometheus" },
+"fieldConfig": {
+"defaults": {
+"color": { "mode": "palette-classic" },
+"custom": { "drawStyle": "line", "fillOpacity": 15, "lineWidth": 2, "showPoints": "never" },
+"unit": "Bps"
+},
+"overrides": [
+{
+"matcher": { "id": "byName", "options": "Validation bloc CPU (ms)" },
+"properties": [
+{ "id": "unit", "value": "ms" },
+{ "id": "custom.axisPlacement", "value": "right" }
+]
+}
+]
+},
+"gridPos": { "h": 8, "w": 12, "x": 12, "y": 19 },
+"id": 9,
+"options": { "legend": { "calcs": [ "mean", "max", "lastNotNull" ], "displayMode": "table", "placement": "bottom" } },
+"title": "Réseau P2P (Fibre 8 Gb/s) & Validation CPU (i9-13900KF)",
+"type": "timeseries",
+"targets": [
+{ "expr": "rate(pearld_p2p_wire_bytes_total[1m])", "legendFormat": "Débit P2P (Octets/s)", "refId": "A" },
+{ "expr": "rate(pearld_chain_block_process_duration_seconds_sum[5m]) / rate(pearld_chain_block_process_duration_seconds_count[5m]) * 1000", "legendFormat": "Validation bloc CPU (ms)", "refId": "B" }
+]
+}
+],
+"refresh": "5s",
+"schemaVersion": 39,
+"style": "dark",
+"tags": [ "pearl", "vllm", "mining", "gpu" ],
+"templating": { "list": [] },
+"time": { "from": "now-1h", "to": "now" },
+"title": "Pearl Solo Mining - RTX 5070 Ti + vLLM + Node 1.5.7",
+"uid": "pearl-solo-mining-v1",
+"version": 3
+}
