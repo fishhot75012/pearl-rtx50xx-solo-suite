@@ -25,6 +25,7 @@ git clone http://github.com/fishhot75012/pearl-rtx50xx-solo-suite.git
   - Exportateur GPU léger basé sur `nvidia-smi` (`gpu_exporter.py` sur port `9400`) : contournement fiable de DCGM sous WSL2 (Température, Watts, VRAM).
   - Exportateur Solo & Probabilités (`solo_exporter.py` sur port `9401`) : comptage des blocs solo trouvés, requêtes de session et calcul dynamique du Temps Moyen Estimé (TTF).
 - **Lancement :** 
+  - Clonage du dépôt et initialisation de l'environnement sous Linux WSL2.
   - Configurez votre fichier `.env` via `cp .env.example .env`
   - Démarrez la supervision avec:
   `cd monitoring && docker compose --env-file ../.env up -d` 

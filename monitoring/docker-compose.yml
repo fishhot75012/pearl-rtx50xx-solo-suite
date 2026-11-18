@@ -21,7 +21,7 @@ services:
       - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-pearladmin}
       - GF_SMTP_ENABLED=${SMTP_ENABLED:-false}
-      - GF_SMTP_HOST=${SMTP_HOST:://gmail.com}
+      - GF_SMTP_HOST=${smtp.gmail.com:587}
       - GF_SMTP_USER=${SMTP_USER}
       - GF_SMTP_PASSWORD=${SMTP_PASSWORD}
       - GF_SMTP_FROM_ADDRESS=${SMTP_USER}
